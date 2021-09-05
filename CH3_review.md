@@ -24,9 +24,9 @@ Not only does this keep the enclosing function small, but it also adds documenta
 
 
 
-## 하나만 해라
+## 하나만 해라
 
-함수는 한가지를 해야한다
+함수는 한가지를 해야한다
 
 If a function does only those steps that are one level below the stated name of the function, then the function is doing one thing.
 
@@ -38,7 +38,7 @@ If a function does only those steps that are one level below the stated name of 
 
 
 
-# 추상화 수준 ?
+# 추상화 수준 ?
 
 > 오늘은 이거다
 
@@ -56,9 +56,11 @@ If a function does only those steps that are one level below the stated name of 
 
 ![image-20210815164835624](photo/image-20210815164835624.png)
 
+
+
  "추상화 수준은 높음, 중간, 낮음으로 구분 할 수 있고 추상화 수준을 높음으로 유지하고 추상화 수준이 중간은 지양한다. "라는 **유토피아 코딩**을 꿈꾸며 우리는 **추상화 수준**이라는 **커뮤니케이션 스킬**을 얻었다.
 
-
+...에?
 
 
 
@@ -70,15 +72,15 @@ if/else의 연속 도 마찬가지! => 스위치와 if,else 문과 비슷한게 
 
 
 
-## 서술적인 이름을 사용해라
+## 서술적인 이름을 사용해라
 
-서술형 이름을 사용한다면 코드를 순차적으로 이해하기 쉬워진다.
+서술형 이름을 사용한다면 코드를 순차적으로 이해하기 쉬워진다.
 
 Be consistent in your names. 일관성을 유지하라
 
 
 
-## 함수 인수
+## 함수 인수
 
 The ideal number of arguments for a function is zero (niladic).
 
@@ -110,6 +112,8 @@ Try to avoid any monadic functions that don’t follow these forms,
 
 ### 플래그
 
+bool, string 등을 함께 넘겨서 로직을 분기하는 방법
+
 못생겼다 -> 추하다로 번역
 
 쓰지마라 => 애초에 쓰는 방법도 몰라서 괜찮
@@ -132,7 +136,7 @@ Try to avoid any monadic functions that don’t follow these forms,
 
 
 
-### 인수 객체
+### 인수 객체
 
 인수가 많이 필요할 경우 => 객체로(클래스 변수로) 선언하는 것도 나쁘지 않다
 
@@ -164,7 +168,7 @@ Side effects are lies.
 
 ## Command Query Separation
 
-### 명령과 질문을 분리하라
+### 명령과 질문을 분리하라
 
 Functions should either do something or answer something, but not both.
 
@@ -180,18 +184,21 @@ Either your function should change the state of an object, or it should return s
 
 ```java
 if (deletePage(page) == E_OK) {
-if (registry.deleteReference(page.name) == E_OK) {
-if (configKeys.deleteKey(page.name.makeKey()) == E_OK){
-logger.log("page deleted");
-} else {
-logger.log("configKey not deleted");
-}
-} else {
-logger.log("deleteReference from registry failed");
-}
-} else {
-logger.log("delete failed");
-return E_ERROR;
+	if (registry.deleteReference(page.name) == E_OK) {
+		if (configKeys.deleteKey(page.name.makeKey()) == E_OK){
+			logger.log("page deleted");
+			} 
+		else {
+			logger.log("configKey not deleted");
+			}
+	} 
+	else {
+		logger.log("deleteReference from registry failed");
+	}
+} 
+else {
+	logger.log("delete failed");
+	return E_ERROR;
 }
 ```
 
@@ -210,21 +217,21 @@ if, else 보다는 except를 이용하자는 의미
 
 
 
-## 반복하지 마라
+## 반복하지 마라
 
 Duplication may be the root of all evil in software.
 
 
 
-## 구조적 프로그래밍
+## 구조적 프로그래밍
 
-**루프 안에서 break나 continue를 사용해선 안된며 goto는 절대로, 절대로 사용하지 말자.**
+**루프 안에서 break나 continue를 사용해선 안되며  goto는 절대로, 절대로 사용하지 말자.**
 
 Following these rules means that there should only be one return statement in a function, no break or continue statements in a loop, and never, ever, any goto statements.
 
 
 
-## 함수를 이렇게 짜고 있는가?
+## 함수를 이렇게 짜고 있는가?
 
 Writing software is like any other kind of writing.
 
